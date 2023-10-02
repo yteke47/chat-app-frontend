@@ -4,7 +4,7 @@ import { IoSend } from 'react-icons/io5';
 import { useMessage } from '../../context/MessageContext';
 
 function MessageBar() {
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('Örnek mesaj');
     const { setMessages } = useMessage();
 
     const handleMessageChange = (e) => {
@@ -15,7 +15,6 @@ function MessageBar() {
         e.preventDefault();
         if (!message.trim()) return false;
         setMessages(msgs => [...msgs, { id: msgs[msgs.length - 1].id + 1, author: 'Yiğit', content: message }])
-        setMessage('');
     };
 
     return (
@@ -34,7 +33,7 @@ function MessageBar() {
                         icon={<IoSend />}
                         aria-label="Send"
                         colorScheme="blue"
-                        disabled={!message}
+                        isDisabled={!message}
                     />
                 </Flex>
             </form>
