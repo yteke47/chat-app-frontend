@@ -1,14 +1,14 @@
 import React from 'react';
 import { HStack, VStack, Avatar, Box, Text } from '@chakra-ui/react';
-import { IoTrashBinSharp } from 'react-icons/io5';
 
-function Chat({ user, message }) {
+function ChatHistory({ user, message }) {
     return (
         <HStack
             h="50px"
             bg="gray.100"
             borderRadius="md"
             px={2}
+            cursor="pointer"
             border="1px solid"
             borderColor="gray.200"
             borderWidth={2}
@@ -29,11 +29,8 @@ function Chat({ user, message }) {
                     </Text>
                 </VStack>
             </Box>
-            <Box bg="red" p={1} borderRadius="full">
-                <IoTrashBinSharp color="white" size="15px" />
-            </Box>
         </HStack>
     );
 }
 
-export default Chat;
+export default ChatHistory;

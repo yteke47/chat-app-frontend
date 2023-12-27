@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Flex, Input, IconButton, Box } from '@chakra-ui/react';
 import { IoSend } from 'react-icons/io5';
-import { useMessage } from '../../context/MessageContext';
 
-function MessageBar() {
-    const [message, setMessage] = useState('Örnek mesaj');
-    const { setMessages } = useMessage();
+function MessageBar({ handleSendMessage }) {
+    const [message, setMessage] = useState('');
 
     const handleMessageChange = (e) => {
         setMessage(e.target.value);
@@ -14,7 +12,8 @@ function MessageBar() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!message.trim()) return false;
-        setMessages(msgs => [...msgs, { id: msgs[msgs.length - 1].id + 1, author: 'Yiğit', content: message }])
+        handleSendMessage(message)
+        setMessage('');
     };
 
     return (
