@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Box, Center, Text, Input, Button, Stack } from '@chakra-ui/react';
 import { sendFriendRequest } from '../../api/chatApi';
-import useUserProfile from '../../hooks/useUserProfile';
+import { useProfile } from '../../context/ProfileContext';
 
 export default function FriendRequest() {
     const [searchInput, setSearchInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const { friendCode } = useUserProfile();
+    const { friendCode } = useProfile();
 
     const backgroundStyles = {
         content: '" "',

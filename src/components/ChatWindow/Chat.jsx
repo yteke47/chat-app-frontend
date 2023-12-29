@@ -2,10 +2,10 @@ import React, { useRef } from 'react';
 import Message from './Message';
 import { Container } from '@chakra-ui/react';
 import ScrollableFeed from 'react-scrollable-feed'
-import useUserProfile from '../../hooks/useUserProfile';
+import { useProfile } from '../../context/ProfileContext';
 
-function Chat({messages}) {
-    const { id: userId } = useUserProfile();
+function Chat({ messages }) {
+    const { id: userId } = useProfile();
     const scrollableFeed = useRef(null);
 
     const handleLazyLoading = () => {
@@ -17,7 +17,7 @@ function Chat({messages}) {
     };
 
     const performLazyLoading = () => {
-        
+
     };
 
     return (

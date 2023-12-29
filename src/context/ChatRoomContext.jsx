@@ -5,13 +5,10 @@ const ChatRoomContext = createContext();
 const ChatRoomProvider = ({ children }) => {
   const [activeChatId, setActiveChatId] = useState(null);
 
+  const contextValue = { activeChatId, setActiveChatId };
+
   return (
-    <ChatRoomContext.Provider
-      value={{
-        activeChatId,
-        setActiveChatId
-      }}
-    >
+    <ChatRoomContext.Provider value={contextValue}>
       {children}
     </ChatRoomContext.Provider>
   );

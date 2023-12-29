@@ -7,16 +7,20 @@ export const SocketProvider = ({ children, socket }) => {
     const { isAuthenticated, user } = useAuth();
 
     useEffect(() => {
+        const handleConnect = () => {
+            if (isAuthenticated && user.token) {
+                socket.authenticate(user.token);
+            }
+        };
+
+        socket.on('connect', handleConnect);
         socket.connect();
 
-        if (isAuthenticated) {
-            socket.authenticate(user.token);
-        }
-
         return () => {
+            socket.off('connect', handleConnect);
             socket.disconnect();
-        }
-    }, [isAuthenticated, user, socket]);
+        };
+    }, [isAuthenticated]);
 
 
     const value = {

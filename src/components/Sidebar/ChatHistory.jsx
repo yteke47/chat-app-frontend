@@ -1,11 +1,11 @@
 import React from 'react';
 import { HStack, VStack, Avatar, Box, Text } from '@chakra-ui/react';
 
-function ChatHistory({ user, message }) {
+function ChatHistory({ isActive, user, message }) {
     return (
         <HStack
             h="50px"
-            bg="gray.100"
+            bg={isActive ? 'teal.50' : 'gray.100'}  // Seçili ise farklı bir arkaplan rengi
             borderRadius="md"
             px={2}
             cursor="pointer"

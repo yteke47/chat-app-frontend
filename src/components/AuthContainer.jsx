@@ -24,7 +24,7 @@ function AuthContainer() {
 
     return (
         <Flex bg="white" p="8" borderRadius="xl" justify="center" align="center" w="full" h="full">
-            <Stack w="full">
+            <Stack w="50%">
                 <Center>
                     <Text as="h1" fontWeight="semibold" fontSize="2xl">
                         {showLoginForm ? "Login" : "Register"}

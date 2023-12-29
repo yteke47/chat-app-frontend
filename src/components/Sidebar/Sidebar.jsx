@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Tag, VStack } from '@chakra-ui/react';
 import ChatHistory from './ChatHistory';
 import { useChatRoom } from '../../context/ChatRoomContext';
-import useUserProfile from '../../hooks/useUserProfile';
 import { handleFriendRequest } from '../../api/chatApi';
-
+import { useProfile } from '../../context/ProfileContext';
+import UserProfile from './UserProfile';
+import { useAuth } from '../../context/AuthContext';
 
 function Sidebar() {
-    const { chats, messageRequests } = useUserProfile();
+    const { chats, messageRequests, username } = useProfile();
     const { setActiveChatId, activeChatId } = useChatRoom();
     const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+    const { setUser } = useAuth();
 
     const handleTabChange = (index) => {
         setSelectedTabIndex(index);
@@ -33,17 +35,25 @@ function Sidebar() {
 
     return (
         <VStack spacing={3} align='stretch'>
+            <UserProfile userName={username} onLogout={() => setUser(null)} />
             <Tabs index={selectedTabIndex} onChange={handleTabChange}>
                 <TabList>
-                    <Tab>Chats</Tab>
-                    <Tab>Requests</Tab>
+                    <Tab>
+                        Chats
+                    </Tab>
+                    <Tab>
+                        Requests {!!messageRequests.length && (
+                            <Tag ml="2" size='sm' colorScheme='red' borderRadius='full'>
+                                {messageRequests.length}
+                            </Tag>
+                        )}
+                    </Tab>
                 </TabList>
-
                 <TabPanels>
                     <TabPanel>
                         {chats.map((chat) => (
                             <Box key={chat.id} onClick={() => handleChatSelect(chat.id)}>
-                                <ChatHistory user={chat.user.username} message={getLastMessageFromChat(chat)} />
+                                <ChatHistory isActive={activeChatId === chat.id} user={chat.user.username} message={getLastMessageFromChat(chat)} />
                             </Box>
                         ))}
                     </TabPanel>

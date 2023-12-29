@@ -6,11 +6,11 @@ import Chat from './Chat'
 import { VStack } from '@chakra-ui/react'
 import { useChatRoom } from '../../context/ChatRoomContext'
 import { useSocket } from '../../context/SocketProvider'
-import useUserProfile from '../../hooks/useUserProfile'
+import { useProfile } from '../../context/ProfileContext'
 
 function ChatWindow() {
     const { activeChatId } = useChatRoom();
-    const { chats } = useUserProfile();
+    const { chats } = useProfile();
     const { socket } = useSocket();
     const activeChat = chats.find(chat => chat.id === activeChatId);
 

@@ -9,5 +9,5 @@ export const handleFriendRequest = (action, friendRequestId) => {
         throw new Error("Invalid action. Accepted values are 'accept' or 'reject'.");
     }
 
-    return httpClient.post(`chat/${action}/${friendRequestId}`, { /* Ek veri eklemek isterseniz buraya ekleyebilirsiniz */ });
+    return httpClient.post(`chat/${action}/${friendRequestId}`);
 };

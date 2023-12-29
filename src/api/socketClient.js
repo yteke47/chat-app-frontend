@@ -9,6 +9,10 @@ class SocketClient {
         });
     }
 
+    getSocketId() {
+        return this.socket.id
+    }
+
     connect() {
         if (!this.socket.connected) {
             this.socket.connect();
@@ -49,13 +53,13 @@ class SocketClient {
 
     off(event) {
         if (typeof event !== 'string') {
-          console.error('Invalid parameter. Please provide a valid event name (string).');
-          return;
+            console.error('Invalid parameter. Please provide a valid event name (string).');
+            return;
         }
-      
+
         this.socket.removeAllListeners(event);
         console.log(`Event listener removed for "${event}"`);
-      }
+    }
 }
 
 export default SocketClient;
